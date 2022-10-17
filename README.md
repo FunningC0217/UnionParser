@@ -40,7 +40,7 @@ end
 - Parent Process watcher
 
 ```mermaid
-graph TD;
+graph LR;
 A[Frontend]--cmdline-->UP[Union Parser]
 UP-->Q{alive}--yes-->UP
 Q--no-->exit
@@ -50,7 +50,7 @@ Q--no-->exit
 
 ```mermaid
 graph LR;
-A[Frontend]--JsonRPC-->UP[Union Parser]-->J[JsonRPC]
+A[Frontend]--JsonRPC-->UP[Union Parser]
 subgraph Query Ast file
 UP-->AST((Ast File))-->UP
 end
