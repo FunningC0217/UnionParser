@@ -1,4 +1,4 @@
-# `UnionParser`
+# `unionparser`
 - Parsing libraries that separate programming language symbols from text, such as C++/Java/Python,  It is expected to integrate any programming language that can be text.
 - It is a back-end program，Implemented using the most popular `IDE` integration protocol `JsonRPC`
 
@@ -8,9 +8,9 @@
 - All calls are implemented through `JsonRPC` access
 ```mermaid
 graph LR;
-  P1[Java Frontend]--JsonRPC-->UP[Union Parser]
-  P2[Python Frontend]--JsonRPC-->UP[Union Parser]
-  P3[C/C++ Frontend]--JsonRPC-->UP[Union Parser]
+  P1[Java Frontend]--JsonRPC-->UP[unionparser]
+  P2[Python Frontend]--JsonRPC-->UP[unionparser]
+  P3[C/C++ Frontend]--JsonRPC-->UP[unionparser]
   UP-->Ast((Ast files))
   Ast-->A1[Java Sources]
   Ast-->A2[Python Sources]
@@ -21,7 +21,7 @@ graph LR;
 
 ```mermaid
 graph LR;
-A[Frontend]--cmdline-->UP[Union Parser]-->J[JsonRPC]
+A[Frontend]--cmdline-->UP[unionparser]-->J[JsonRPC]
 subgraph Update Ast file
 UP-->AST((Ast File))-->UP
 end
@@ -31,7 +31,7 @@ end
 
 ```mermaid
 graph LR;
-FW[File Watcher]-->UP[Union Parser]--JSONRPC-->A[Frontend]
+FW[File Watcher]-->UP[unionparser]--JSONRPC-->A[Frontend]
 subgraph Update Ast file
 UP-->AST((Ast File))-->UP
 end
@@ -41,7 +41,7 @@ end
 
 ```mermaid
 graph LR;
-A[Frontend]--cmdline-->UP[Union Parser]
+A[Frontend]--cmdline-->UP[unionparser]
 UP-->Q{alive}--yes-->UP
 Q--no-->exit
 ```
@@ -50,7 +50,7 @@ Q--no-->exit
 
 ```mermaid
 graph LR;
-A[Frontend]--JsonRPC-->UP[Union Parser]
+A[Frontend]--JsonRPC-->UP[unionparser]
 subgraph Query Ast file
 UP-->AST((Ast File))-->UP
 end
