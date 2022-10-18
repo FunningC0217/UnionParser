@@ -33,7 +33,7 @@ graph LR;
 subgraph Update File Tree
 FW[File Watcher]-->UP[unionparser]-->S((Symbol Tree))
 end
-T((File Tree))-->A[Frontend]
+T((Symbol Tree))-->A[Frontend]
 ```
 
 - Parent process watcher
