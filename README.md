@@ -1,6 +1,6 @@
 # `unionparser`
 - Parsing program that separate programming language symbols from text, such as C++/Java/Python,  It is expected to integrate any programming language that can be text.
-- It is a back-end program，Implemented using the most popular `IDE` integration from file tree
+- It is a back-end program，Implemented using the so easy `IDE` integration from file tree
 
 
 
