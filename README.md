@@ -1,29 +1,28 @@
 # `unionparser`
-- Parsing libraries that separate programming language symbols from text, such as C++/Java/Python,  It is expected to integrate any programming language that can be text.
-- It is a back-end program，Implemented using the most popular `IDE` integration protocol `JsonRPC`
+- Parsing program that separate programming language symbols from text, such as C++/Java/Python,  It is expected to integrate any programming language that can be text.
+- It is a back-end program，Implemented using the most popular `IDE` integration from file tree
 
 
 
 ## Schematic Diagram of Frame
-- All calls are implemented through `JsonRPC` access
+- display symbol file tree
 ```mermaid
 graph LR;
-  P1[Java Frontend]--JsonRPC-->UP[unionparser]
-  P2[Python Frontend]--JsonRPC-->UP[unionparser]
-  P3[C/C++ Frontend]--JsonRPC-->UP[unionparser]
-  UP-->Ast((Ast files))
-  Ast-->A1[Java Sources]
-  Ast-->A2[Python Sources]
-  Ast-->A3[C/C++ Sources]
+  P1[Java Frontend]-->T((File Tree))
+  P2[Python Frontend]-->T((File Tree))
+  P3[C/C++ Frontend]-->T((File Tree))
+  T-->A1[Java Sources]
+  T-->A2[Python Sources]
+  T-->A3[C/C++ Sources]
 ```
 
 - Parser source files from initialize
 
 ```mermaid
 graph LR;
-A[Frontend]--cmdline-->UP[unionparser]-->J[JsonRPC]
-subgraph Update Ast file
-UP-->AST((Ast File))-->UP
+A[Frontend]--cmdline-->UP[unionparser]
+subgraph Update File Tree
+UP-->T((File Tree))-->UP
 end
 ```
 
@@ -31,13 +30,13 @@ end
 
 ```mermaid
 graph LR;
-FW[File Watcher]-->UP[unionparser]--JSONRPC-->A[Frontend]
-subgraph Update Ast file
-UP-->AST((Ast File))-->UP
+subgraph Update File Tree
+FW[File Watcher]-->UP[unionparser]-->T((File Tree))
 end
+T((File Tree))-->A[Frontend]
 ```
 
-- Parent Process watcher
+- Parent process watcher
 
 ```mermaid
 graph LR;
@@ -50,8 +49,5 @@ Q--no-->exit
 
 ```mermaid
 graph LR;
-A[Frontend]--JsonRPC-->UP[unionparser]
-subgraph Query Ast file
-UP-->AST((Ast File))-->UP
-end
+A[Frontend]-->T((File Tree))
 ```
