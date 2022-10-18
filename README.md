@@ -8,12 +8,12 @@
 - display symbol file tree
 ```mermaid
 graph LR;
-  P1[Java Frontend]-->T((File Tree))
-  P2[Python Frontend]-->T((File Tree))
-  P3[C/C++ Frontend]-->T((File Tree))
-  T-->A1[Java Sources]
-  T-->A2[Python Sources]
-  T-->A3[C/C++ Sources]
+  P1[Java Frontend]-->S((Symbol Tree))
+  P2[Python Frontend]-->S((Symbol Tree))
+  P3[C/C++ Frontend]-->S((Symbol Tree))
+  S-->A1[Java Sources]
+  S-->A2[Python Sources]
+  S-->A3[C/C++ Sources]
 ```
 
 - Parser source files from initialize
@@ -22,7 +22,7 @@ graph LR;
 graph LR;
 A[Frontend]--cmdline-->UP[unionparser]
 subgraph Update File Tree
-UP-->T((File Tree))-->UP
+UP-->S((Symbol Tree))-->UP
 end
 ```
 
@@ -31,7 +31,7 @@ end
 ```mermaid
 graph LR;
 subgraph Update File Tree
-FW[File Watcher]-->UP[unionparser]-->T((File Tree))
+FW[File Watcher]-->UP[unionparser]-->S((Symbol Tree))
 end
 T((File Tree))-->A[Frontend]
 ```
@@ -49,5 +49,5 @@ Q--no-->exit
 
 ```mermaid
 graph LR;
-A[Frontend]-->T((File Tree))
+A[Frontend]-->S((Symbol Tree))
 ```
