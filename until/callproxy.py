@@ -1,9 +1,8 @@
 import mimetypes
 import os
 from until.parser import Parser
+from until.globallog import log
 
-import logging
-log = logging.getLogger(__name__)
 
 class CallProxy:
     __parsers = []
@@ -22,6 +21,8 @@ class CallProxy:
 
     def setStorage(self, storage):
         self.__storage = storage
+        if not os.path.exists(storage):
+            os.mkdir(storage)
 
     def storage(self):
         return self.__storage
@@ -39,16 +40,28 @@ class CallProxy:
         return languages
 
     def addParser(self, parser):
-       if isinstance(parser, Parser):
-           self.__parsers.append(parser)
-       else:
-           log.critical("Can't regiest handler for not Parser")
+        if isinstance(parser, Parser):
+            self.__parsers.append(parser)
+        else:
+            log().critical("Can't regiest handler for not Parser")
 
     def doParse(self):
+        abs_files = []
         for root, dirs, files in os.walk(self.__workspace):
             for file in files:
-                for parser in self.__parsers:
-                    for mime in mimetypes.guess_type(root + os.sep + file):
-                        if mime in parser.mimetypes():
-                            parser.doParse(self.__storage, root + os.sep + file)
+                abs_files.append(os.path.abspath(root + os.sep + file))
 
+        for parser in self.__parsers:
+            lang_files = []
+            all_file = abs_files
+            # Parse according to the given order
+            for parser_mine in parser.mimetypes():
+                for file in all_file:
+                    file_mime = mimetypes.guess_type(file)[0]
+                    if file_mime == parser_mine:
+                        lang_files.append(file)
+            for file in lang_files:
+                saved_path = self.__storage + os.sep + parser.rootName()
+                if not os.path.exists(saved_path):
+                    os.mkdir(saved_path)
+                parser.doParse(saved_path, lang_files, file)

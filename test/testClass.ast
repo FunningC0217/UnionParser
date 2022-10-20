@@ -1,0 +1,186 @@
+TranslationUnitDecl 0x2c1aec8 <<invalid sloc>> <invalid sloc>
+|-TypedefDecl 0x2c1b7a0 <<invalid sloc>> <invalid sloc> implicit __int128_t '__int128'
+| `-BuiltinType 0x2c1b460 '__int128'
+|-TypedefDecl 0x2c1b808 <<invalid sloc>> <invalid sloc> implicit __uint128_t 'unsigned __int128'
+| `-BuiltinType 0x2c1b480 'unsigned __int128'
+|-TypedefDecl 0x2c1bb48 <<invalid sloc>> <invalid sloc> implicit __NSConstantString '__NSConstantString_tag'
+| `-RecordType 0x2c1b8f0 '__NSConstantString_tag'
+|   `-CXXRecord 0x2c1b858 '__NSConstantString_tag'
+|-TypedefDecl 0x2c55350 <<invalid sloc>> <invalid sloc> implicit __builtin_ms_va_list 'char *'
+| `-PointerType 0x2c1bba0 'char *'
+|   `-BuiltinType 0x2c1af60 'char'
+|-TypedefDecl 0x2c55688 <<invalid sloc>> <invalid sloc> implicit __builtin_va_list '__va_list_tag [1]'
+| `-ConstantArrayType 0x2c55630 '__va_list_tag [1]' 1 
+|   `-RecordType 0x2c55440 '__va_list_tag'
+|     `-CXXRecord 0x2c553a0 '__va_list_tag'
+|-CXXRecordDecl 0x2c556d8 <./testClass.hpp:3:1, line:7:1> line:3:8 referenced struct AAA definition
+| |-DefinitionData pass_in_registers aggregate standard_layout trivially_copyable pod trivial literal
+| | |-DefaultConstructor exists trivial
+| | |-CopyConstructor simple trivial has_const_param implicit_has_const_param
+| | |-MoveConstructor exists simple trivial
+| | |-CopyAssignment trivial has_const_param implicit_has_const_param
+| | |-MoveAssignment exists simple trivial
+| | `-Destructor simple irrelevant trivial
+| |-CXXRecordDecl 0x2c557f8 <col:1, col:8> col:8 implicit struct AAA
+| |-FieldDecl 0x2c558a8 <line:4:5, col:9> col:9 number 'int'
+| |-FieldDecl 0x2c55900 <line:5:5, col:10> col:10 ch 'char'
+| |-CXXMethodDecl 0x2c559d0 <line:6:5, col:17> col:10 method 'void ()'
+| |-CXXMethodDecl 0x2c84620 <line:3:8> col:8 implicit constexpr operator= 'AAA &(const AAA &)' inline default trivial noexcept-unevaluated 0x2c84620
+| | `-ParmVarDecl 0x2c84740 <col:8> col:8 'const AAA &'
+| |-CXXMethodDecl 0x2c847d8 <col:8> col:8 implicit constexpr operator= 'AAA &(AAA &&)' inline default trivial noexcept-unevaluated 0x2c847d8
+| | `-ParmVarDecl 0x2c84900 <col:8> col:8 'AAA &&'
+| |-CXXDestructorDecl 0x2c84d50 <col:8> col:8 implicit ~AAA 'void () noexcept' inline default trivial
+| |-CXXConstructorDecl 0x2c84f00 <col:8> col:8 implicit used AAA 'void () noexcept' inline default trivial
+| | `-CompoundStmt 0x2c85328 <col:8>
+| |-CXXConstructorDecl 0x2c84fe8 <col:8> col:8 implicit constexpr AAA 'void (const AAA &)' inline default trivial noexcept-unevaluated 0x2c84fe8
+| | `-ParmVarDecl 0x2c85120 <col:8> col:8 'const AAA &'
+| `-CXXConstructorDecl 0x2c85188 <col:8> col:8 implicit constexpr AAA 'void (AAA &&)' inline default trivial noexcept-unevaluated 0x2c85188
+|   `-ParmVarDecl 0x2c852c0 <col:8> col:8 'AAA &&'
+|-CXXRecordDecl 0x2c55a90 <line:9:1, line:18:1> line:9:7 class BBB definition
+| |-DefinitionData polymorphic has_user_declared_ctor can_const_default_init
+| | |-DefaultConstructor exists non_trivial user_provided
+| | |-CopyConstructor simple non_trivial has_const_param implicit_has_const_param
+| | |-MoveConstructor
+| | |-CopyAssignment non_trivial has_const_param implicit_has_const_param
+| | |-MoveAssignment
+| | `-Destructor non_trivial user_declared
+| |-CXXRecordDecl 0x2c55bb8 <col:1, col:7> col:7 implicit referenced class BBB
+| |-FieldDecl 0x2c55c60 <line:11:5, col:9> col:9 aaa 'AAA'
+| |-FieldDecl 0x2c55cc0 <line:12:5, col:9> col:9 class_number 'int'
+| |-FieldDecl 0x2c55d18 <line:13:5, col:10> col:10 class_ch 'char'
+| |-AccessSpecDecl 0x2c55d60 <line:14:1, col:7> col:1 public
+| |-CXXConstructorDecl 0x2c55df8 <line:15:5, col:9> col:5 BBB 'void ()'
+| |-CXXDestructorDecl 0x2c55ef8 <line:16:5, col:18> col:13 used ~BBB 'void () noexcept' virtual
+| |-CXXMethodDecl 0x2c55fc8 <line:17:5, col:17> col:10 method 'void ()'
+| |-CXXMethodDecl 0x2c56108 <line:9:7> col:7 implicit operator= 'BBB &(const BBB &)' inline default noexcept-unevaluated 0x2c56108
+| | `-ParmVarDecl 0x2c56230 <col:7> col:7 'const BBB &'
+| `-CXXConstructorDecl 0x2c85df8 <col:7> col:7 implicit constexpr BBB 'void (const BBB &)' inline default noexcept-unevaluated 0x2c85df8
+|   `-ParmVarDecl 0x2c85f30 <col:7> col:7 'const BBB &'
+|-CXXMethodDecl 0x2c849a8 parent 0x2c556d8 prev 0x2c559d0 <./testClass.cpp:3:1, col:20> col:11 method 'void ()'
+| `-CompoundStmt 0x2c84a90 <col:19, col:20>
+|-CXXMethodDecl 0x2c84ae0 parent 0x2c55a90 prev 0x2c55fc8 <line:5:1, col:20> col:11 method 'void ()'
+| `-CompoundStmt 0x2c84bc8 <col:19, col:20>
+|-CXXDestructorDecl 0x2c84c28 parent 0x2c55a90 prev 0x2c55ef8 <line:7:1, line:9:1> line:7:6 used ~BBB 'void () noexcept'
+| `-CompoundStmt 0x2c85380 <col:12, line:9:1>
+|   `-DeclStmt 0x2c85368 <line:8:5, col:12>
+|     `-VarDecl 0x2c84e80 <col:5, col:9> col:9 aaa 'AAA' callinit
+|       `-CXXConstructExpr 0x2c85338 <col:9> 'AAA' 'void () noexcept'
+|-FunctionDecl 0x2c853d8 <<invalid sloc>> <invalid sloc> implicit operator new 'void *(unsigned long)'
+| |-ParmVarDecl 0x2c854b8 <<invalid sloc>> <invalid sloc> implicit 'unsigned long'
+| `-VisibilityAttr 0x2c85478 <<invalid sloc>> Implicit Default
+|-FunctionDecl 0x2c85520 <<invalid sloc>> <invalid sloc> implicit operator new[] 'void *(unsigned long)'
+| |-ParmVarDecl 0x2c85a40 <<invalid sloc>> <invalid sloc> implicit 'unsigned long'
+| `-VisibilityAttr 0x2c855c0 <<invalid sloc>> Implicit Default
+|-FunctionDecl 0x2c85b28 <<invalid sloc>> <invalid sloc> implicit used operator delete 'void (void *) noexcept'
+| |-ParmVarDecl 0x2c85c08 <<invalid sloc>> <invalid sloc> implicit 'void *'
+| `-VisibilityAttr 0x2c85bc8 <<invalid sloc>> Implicit Default
+|-FunctionDecl 0x2c85c70 <<invalid sloc>> <invalid sloc> implicit operator delete[] 'void (void *) noexcept'
+| |-ParmVarDecl 0x2c85d50 <<invalid sloc>> <invalid sloc> implicit 'void *'
+| `-VisibilityAttr 0x2c85d10 <<invalid sloc>> Implicit Default
+|-CXXConstructorDecl 0x2c85f98 parent 0x2c55a90 prev 0x2c55df8 <line:11:1, col:12> col:6 BBB 'void ()'
+| |-CXXCtorInitializer Field 0x2c55c60 'aaa' 'AAA'
+| | `-CXXConstructExpr 0x2c86080 <col:6> 'AAA' 'void () noexcept'
+| `-CompoundStmt 0x2c860e0 <col:11, col:12>
+`-CXXRecordDecl 0x2c860f0 <line:14:1, line:17:1> line:14:7 class CCC definition
+  |-DefinitionData pass_in_registers standard_layout trivially_copyable trivial literal
+  | |-DefaultConstructor exists trivial needs_implicit
+  | |-CopyConstructor simple trivial has_const_param needs_implicit implicit_has_const_param
+  | |-MoveConstructor exists simple trivial needs_implicit
+  | |-CopyAssignment trivial has_const_param needs_implicit implicit_has_const_param
+  | |-MoveAssignment exists simple trivial needs_implicit
+  | `-Destructor simple irrelevant trivial needs_implicit
+  |-CXXRecordDecl 0x2c86218 <col:1, col:7> col:7 implicit class CCC
+  `-FieldDecl 0x2c862c0 <line:16:5, col:9> col:9 aaa 'AAA'
+TranslationUnitDecl 0x2bb6ec8 <<invalid sloc>> <invalid sloc>
+|-TypedefDecl 0x2bb77a0 <<invalid sloc>> <invalid sloc> implicit __int128_t '__int128'
+| `-BuiltinType 0x2bb7460 '__int128'
+|-TypedefDecl 0x2bb7808 <<invalid sloc>> <invalid sloc> implicit __uint128_t 'unsigned __int128'
+| `-BuiltinType 0x2bb7480 'unsigned __int128'
+|-TypedefDecl 0x2bb7b48 <<invalid sloc>> <invalid sloc> implicit __NSConstantString '__NSConstantString_tag'
+| `-RecordType 0x2bb78f0 '__NSConstantString_tag'
+|   `-CXXRecord 0x2bb7858 '__NSConstantString_tag'
+|-TypedefDecl 0x2bf1350 <<invalid sloc>> <invalid sloc> implicit __builtin_ms_va_list 'char *'
+| `-PointerType 0x2bb7ba0 'char *'
+|   `-BuiltinType 0x2bb6f60 'char'
+|-TypedefDecl 0x2bf1688 <<invalid sloc>> <invalid sloc> implicit __builtin_va_list '__va_list_tag [1]'
+| `-ConstantArrayType 0x2bf1630 '__va_list_tag [1]' 1 
+|   `-RecordType 0x2bf1440 '__va_list_tag'
+|     `-CXXRecord 0x2bf13a0 '__va_list_tag'
+|-CXXRecordDecl 0x2bf16d8 <./testClass.hpp:3:1, line:7:1> line:3:8 referenced struct AAA definition
+| |-DefinitionData pass_in_registers aggregate standard_layout trivially_copyable pod trivial literal
+| | |-DefaultConstructor exists trivial
+| | |-CopyConstructor simple trivial has_const_param implicit_has_const_param
+| | |-MoveConstructor exists simple trivial
+| | |-CopyAssignment trivial has_const_param implicit_has_const_param
+| | |-MoveAssignment exists simple trivial
+| | `-Destructor simple irrelevant trivial
+| |-CXXRecordDecl 0x2bf17f8 <col:1, col:8> col:8 implicit struct AAA
+| |-FieldDecl 0x2bf18a8 <line:4:5, col:9> col:9 number 'int'
+| |-FieldDecl 0x2bf1900 <line:5:5, col:10> col:10 ch 'char'
+| |-CXXMethodDecl 0x2bf19d0 <line:6:5, col:17> col:10 method 'void ()'
+| |-CXXMethodDecl 0x2c20620 <line:3:8> col:8 implicit constexpr operator= 'AAA &(const AAA &)' inline default trivial noexcept-unevaluated 0x2c20620
+| | `-ParmVarDecl 0x2c20740 <col:8> col:8 'const AAA &'
+| |-CXXMethodDecl 0x2c207d8 <col:8> col:8 implicit constexpr operator= 'AAA &(AAA &&)' inline default trivial noexcept-unevaluated 0x2c207d8
+| | `-ParmVarDecl 0x2c20900 <col:8> col:8 'AAA &&'
+| |-CXXDestructorDecl 0x2c20d50 <col:8> col:8 implicit ~AAA 'void () noexcept' inline default trivial
+| |-CXXConstructorDecl 0x2c20f00 <col:8> col:8 implicit used AAA 'void () noexcept' inline default trivial
+| | `-CompoundStmt 0x2c21328 <col:8>
+| |-CXXConstructorDecl 0x2c20fe8 <col:8> col:8 implicit constexpr AAA 'void (const AAA &)' inline default trivial noexcept-unevaluated 0x2c20fe8
+| | `-ParmVarDecl 0x2c21120 <col:8> col:8 'const AAA &'
+| `-CXXConstructorDecl 0x2c21188 <col:8> col:8 implicit constexpr AAA 'void (AAA &&)' inline default trivial noexcept-unevaluated 0x2c21188
+|   `-ParmVarDecl 0x2c212c0 <col:8> col:8 'AAA &&'
+|-CXXRecordDecl 0x2bf1a90 <line:9:1, line:18:1> line:9:7 class BBB definition
+| |-DefinitionData polymorphic has_user_declared_ctor can_const_default_init
+| | |-DefaultConstructor exists non_trivial user_provided
+| | |-CopyConstructor simple non_trivial has_const_param implicit_has_const_param
+| | |-MoveConstructor
+| | |-CopyAssignment non_trivial has_const_param implicit_has_const_param
+| | |-MoveAssignment
+| | `-Destructor non_trivial user_declared
+| |-CXXRecordDecl 0x2bf1bb8 <col:1, col:7> col:7 implicit referenced class BBB
+| |-FieldDecl 0x2bf1c60 <line:11:5, col:9> col:9 aaa 'AAA'
+| |-FieldDecl 0x2bf1cc0 <line:12:5, col:9> col:9 class_number 'int'
+| |-FieldDecl 0x2bf1d18 <line:13:5, col:10> col:10 class_ch 'char'
+| |-AccessSpecDecl 0x2bf1d60 <line:14:1, col:7> col:1 public
+| |-CXXConstructorDecl 0x2bf1df8 <line:15:5, col:9> col:5 BBB 'void ()'
+| |-CXXDestructorDecl 0x2bf1ef8 <line:16:5, col:18> col:13 used ~BBB 'void () noexcept' virtual
+| |-CXXMethodDecl 0x2bf1fc8 <line:17:5, col:17> col:10 method 'void ()'
+| |-CXXMethodDecl 0x2bf2108 <line:9:7> col:7 implicit operator= 'BBB &(const BBB &)' inline default noexcept-unevaluated 0x2bf2108
+| | `-ParmVarDecl 0x2bf2230 <col:7> col:7 'const BBB &'
+| `-CXXConstructorDecl 0x2c21df8 <col:7> col:7 implicit constexpr BBB 'void (const BBB &)' inline default noexcept-unevaluated 0x2c21df8
+|   `-ParmVarDecl 0x2c21f30 <col:7> col:7 'const BBB &'
+|-CXXMethodDecl 0x2c209a8 parent 0x2bf16d8 prev 0x2bf19d0 <./testClass.cpp:3:1, col:20> col:11 method 'void ()'
+| `-CompoundStmt 0x2c20a90 <col:19, col:20>
+|-CXXMethodDecl 0x2c20ae0 parent 0x2bf1a90 prev 0x2bf1fc8 <line:5:1, col:20> col:11 method 'void ()'
+| `-CompoundStmt 0x2c20bc8 <col:19, col:20>
+|-CXXDestructorDecl 0x2c20c28 parent 0x2bf1a90 prev 0x2bf1ef8 <line:7:1, line:9:1> line:7:6 used ~BBB 'void () noexcept'
+| `-CompoundStmt 0x2c21380 <col:12, line:9:1>
+|   `-DeclStmt 0x2c21368 <line:8:5, col:12>
+|     `-VarDecl 0x2c20e80 <col:5, col:9> col:9 aaa 'AAA' callinit
+|       `-CXXConstructExpr 0x2c21338 <col:9> 'AAA' 'void () noexcept'
+|-FunctionDecl 0x2c213d8 <<invalid sloc>> <invalid sloc> implicit operator new 'void *(unsigned long)'
+| |-ParmVarDecl 0x2c214b8 <<invalid sloc>> <invalid sloc> implicit 'unsigned long'
+| `-VisibilityAttr 0x2c21478 <<invalid sloc>> Implicit Default
+|-FunctionDecl 0x2c21520 <<invalid sloc>> <invalid sloc> implicit operator new[] 'void *(unsigned long)'
+| |-ParmVarDecl 0x2c21a40 <<invalid sloc>> <invalid sloc> implicit 'unsigned long'
+| `-VisibilityAttr 0x2c215c0 <<invalid sloc>> Implicit Default
+|-FunctionDecl 0x2c21b28 <<invalid sloc>> <invalid sloc> implicit used operator delete 'void (void *) noexcept'
+| |-ParmVarDecl 0x2c21c08 <<invalid sloc>> <invalid sloc> implicit 'void *'
+| `-VisibilityAttr 0x2c21bc8 <<invalid sloc>> Implicit Default
+|-FunctionDecl 0x2c21c70 <<invalid sloc>> <invalid sloc> implicit operator delete[] 'void (void *) noexcept'
+| |-ParmVarDecl 0x2c21d50 <<invalid sloc>> <invalid sloc> implicit 'void *'
+| `-VisibilityAttr 0x2c21d10 <<invalid sloc>> Implicit Default
+|-CXXConstructorDecl 0x2c21f98 parent 0x2bf1a90 prev 0x2bf1df8 <line:11:1, col:12> col:6 BBB 'void ()'
+| |-CXXCtorInitializer Field 0x2bf1c60 'aaa' 'AAA'
+| | `-CXXConstructExpr 0x2c22080 <col:6> 'AAA' 'void () noexcept'
+| `-CompoundStmt 0x2c220e0 <col:11, col:12>
+`-CXXRecordDecl 0x2c220f0 <line:14:1, line:17:1> line:14:7 class CCC definition
+  |-DefinitionData pass_in_registers standard_layout trivially_copyable trivial literal
+  | |-DefaultConstructor exists trivial needs_implicit
+  | |-CopyConstructor simple trivial has_const_param needs_implicit implicit_has_const_param
+  | |-MoveConstructor exists simple trivial needs_implicit
+  | |-CopyAssignment trivial has_const_param needs_implicit implicit_has_const_param
+  | |-MoveAssignment exists simple trivial needs_implicit
+  | `-Destructor simple irrelevant trivial needs_implicit
+  |-CXXRecordDecl 0x2c22218 <col:1, col:7> col:7 implicit class CCC
+  `-FieldDecl 0x2c222c0 <line:16:5, col:9> col:9 aaa 'AAA'

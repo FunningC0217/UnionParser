@@ -1,8 +1,12 @@
 from until.parser import Parser
+from until.globallog import log
 
 class JavaParser(Parser):
-    def doParse(self, storage, file):
-        pass
+    def __init__(self):
+        super(JavaParser, self).__init__()
+
+    def doParse(self, storage, files, file):
+        super(JavaParser, self).doParse(storage, files, file)
 
     def language(self):
         return ['Java']

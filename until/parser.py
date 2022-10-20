@@ -1,8 +1,7 @@
 from abc import ABCMeta, abstractmethod
-import logging
+from until.globallog import log
 import os
 
-log = logging.getLogger(__name__)
 
 class Parser:
     __metaclass = ABCMeta
@@ -11,10 +10,10 @@ class Parser:
         pass
 
     @abstractmethod
-    def doParse(self, storage, file):
-        log.critical('doParser ' + 'language:\"' + ','.join(self.language()) + '\", ' +
-                     'file:\"' + file + '\", ' +
-                     'storage:\"' + storage + os.sep + self.rootName() + '\"')
+    def doParse(self, storage, files, file):
+        log(__name__).critical('doParser ' + 'language:\"' + ','.join(self.language()) + '\", ' +
+                               'file:\"' + file + '\"' +
+                               'storage:\"' + storage + '\"')
 
     @abstractmethod
     def language(self):
