@@ -52,3 +52,15 @@ Q--no-->exit
 graph LR;
 A[Frontend]-->S((Symbol Tree))
 ```
+
+# usage
+
+use command:
+
+```bash
+python3 __main__.py --storage ./test/storage --workspace ./test
+```
+
+generate symbol tree to `./test/storage`  path，like same:
+
+![run all language parser](doc/runTestAllLang.png)
