@@ -55,7 +55,41 @@ A[Frontend]-->S((Symbol Tree))
 
 # usage
 
-use command:
+can to use show help, there are detailed instructions:
+
+```
+(venv) funning@funning-PC:~/PycharmProjects/unionparser$ python3 __main__.py -h
+llvm configure lib directory:/usr/lib/llvm-7/lib
+
+usage: __main__.py [-h] -s STORAGE [-w WORKSPACE] [-l {C,C++,Java,Python}]
+                   [-j JOB] [-v]
+                   [--log-config LOG_CONFIG | --log-file LOG_FILE]
+
+Union Parser
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s STORAGE, --storage STORAGE
+                        storage path from do parse language files result saved
+  -w WORKSPACE, --workspace WORKSPACE
+                        language source files root path, same LSP workspace,
+                        default is program path.
+  -l {C,C++,Java,Python}, --language {C,C++,Java,Python}
+                        select workspace language type files. It is blank by
+                        default. If no language is specified, all supported
+                        languages will be processed.
+  -j JOB, --job JOB     The number of tasks to be started is generally not
+                        required to be specified. By default, it is consistent
+                        with the number of CPUs
+  -v, --verbose         Increase verbosity of log output, overrides log config
+                        file.
+  --log-config LOG_CONFIG
+                        Path to a JSON file containing Python logging config.
+  --log-file LOG_FILE   Redirect logs to the given file instead of writing to
+                        stderr.Has no effect if used with --log-config.
+```
+
+to use command:
 
 ```bash
 python3 __main__.py --storage ./test/storage --workspace ./test
