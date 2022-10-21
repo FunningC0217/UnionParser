@@ -94,8 +94,7 @@ optional arguments:
 ```bash
 python3 __main__.py --storage ./test/storage --workspace ./test
 ```
-
-generate symbol tree to `./test/storage`  path，like same:
+  generate symbol tree to `./test/storage`  path，like same:
 
 ![run all language parser](doc/parsedSymbolTree.png)
 
