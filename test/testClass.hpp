@@ -5,11 +5,13 @@ union un1
     int intNum;
 };
 
+int gint = 10;
+
 namespace na1
 {
     namespace na2
     {
-
+        static int testNNInt;
     }
 }
 
@@ -19,7 +21,7 @@ struct AAA{
     void AAAmethod();
 };
 
-class BBB
+class BBB : AAA
 {
     AAA inC_aaa;
     int inC_number;
