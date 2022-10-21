@@ -55,7 +55,7 @@ A[Frontend]-->S((Symbol Tree))
 
 # usage
 
-can to use show help, there are detailed instructions:
+- Can to use show help option, there are detailed instructions:
 
 ```
 (venv) funning@funning-PC:~/PycharmProjects/unionparser$ python3 __main__.py -h
@@ -89,7 +89,7 @@ optional arguments:
                         stderr.Has no effect if used with --log-config.
 ```
 
-to use command:
+- Use command to parse source:
 
 ```bash
 python3 __main__.py --storage ./test/storage --workspace ./test
@@ -97,4 +97,10 @@ python3 __main__.py --storage ./test/storage --workspace ./test
 
 generate symbol tree to `./test/storage`  path，like same:
 
-![run all language parser](doc/runTestAllLang.png)
+![run all language parser](doc/parsedSymbolTree.png)
+
+- Query source tokens
+
+  can to use `grep -r : |grep reference`  or argument `declared`，for:
+
+  ![run all language parser](doc/optionTokenSaveQuery.png)
