@@ -100,10 +100,10 @@ A[Frontend]-->S((Symbol Tree))
 
   generate symbol tree to `./test/storage`  path, like same:
 
-![run all language parser](doc/parsedSymbolTree.png)
+  ![run all language parser](doc/parsedSymbolTree.png)
 
 - Query source tokens :
 
   can to use `grep -r : |grep reference`  or argument `declared` , for:
 
-![run all language parser](doc/optionTokenSaveQuery.png)
+  ![run all language parser](doc/optionTokenSaveQuery.png)
