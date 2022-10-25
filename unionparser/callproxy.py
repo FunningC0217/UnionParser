@@ -1,7 +1,7 @@
 import mimetypes
 import os
-from until.parser import Parser
-from until.globallog import log
+from unionparser.parser import Parser
+from unionparser.globallog import log
 
 
 class CallProxy:

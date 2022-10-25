@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from until.globallog import log
+from unionparser.globallog import log
 import os
 
 

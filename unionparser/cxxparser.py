@@ -5,8 +5,8 @@ import subprocess
 import clang.cindex
 from clang.cindex import Config  # 配置
 
-from until.globallog import log
-from until.parser import Parser
+from unionparser.globallog import log
+from unionparser.parser import Parser
 
 
 class CxxParser(Parser):
