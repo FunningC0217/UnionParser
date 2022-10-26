@@ -31,7 +31,6 @@ class JavaParser(Parser):
                     prefix_len = len(e_types[0:len(e_types) - 1])
                     parent = findParent(e_tree, prefix_len)
                     if parent:
-                        print("find parent", parent.prefix_len, parent.type, parent.string, parent.range)
                         node = SyntaxTreeNode()
                         node.prefix_len = prefix_len
                         node.type = e_type
@@ -39,13 +38,16 @@ class JavaParser(Parser):
                         node.parent = parent
                         node.string = e_string
                         node.child = []
-                        print("add child", prefix_len, e_type, e_string, e_range)
+                        log(__name__).critical("find parent: " + parent.string + " add child: " + e_string)
                         parent.child.append(node)
         return e_tree
 
     def doParse(self, storage, files, file):
         super(JavaParser, self).doParse(storage, files, file)
-        p = os.popen("java -jar 3rd/checkstyle-10.3.4-all.jar -t " + file)
+        p = os.popen("java -jar "
+                     + os.path.abspath(os.path.dirname(__file__))
+                     + os.path.sep + "3rd/checkstyle-10.3.4-all.jar -t "
+                     + file)
         ast_tree = self.astTreeFromOut(p.read())
 
     def language(self):
