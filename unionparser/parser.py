@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from unionparser.globallog import log
+from unionparser.syntaxtree import SyntaxTreeNode, findParent
 import os
-
 
 class Parser:
     __metaclass = ABCMeta
@@ -16,6 +16,10 @@ class Parser:
                                'storage:\"' + storage + '\"')
 
     @abstractmethod
+    def astTreeFromOut(self, ast_dump_out: str) -> SyntaxTreeNode:
+        return None
+
+    @abstractmethod
     def language(self):
         return []
 
@@ -27,19 +31,24 @@ class Parser:
     def rootName(self):
         return ''
 
-    def reference(self):
+    @staticmethod
+    def reference():
         return '.reference'
 
-    def declared(self):
+    @staticmethod
+    def declared():
         return '.declared'
 
-    def definitions(self):
+    @staticmethod
+    def definitions():
         return '.definitions'
 
-    def record(self):
+    @staticmethod
+    def record():
         return '.record'
 
-    def fileHasLine(self, file, line):
+    @staticmethod
+    def fileHasLine(file, line):
         has_line = False
         if os.path.exists(file):
             f = open(file, mode="r", encoding="utf8")
@@ -51,3 +60,4 @@ class Parser:
                 r_line = f.readline()
             f.close()
         return has_line
+

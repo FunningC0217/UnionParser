@@ -148,7 +148,7 @@ class CxxParser(Parser):
         if os.path.exists(cursor_map_path):
             # write record type info, befor can use query from val_decl
             if cursor.type.kind.name == "RECORD":
-                recode_file = cursor_map_path + os.sep + self.record()
+                recode_file = cursor_map_path + os.sep + Parser.record()
                 write_line = "kind.name=" + cursor.kind.name + os.linesep \
                              + "displayname=" + cursor.displayname
                 f = open(recode_file, mode="w+", encoding="utf8")
@@ -178,7 +178,7 @@ class CxxParser(Parser):
             f.close()
 
     def writeReferenceFile(self, record_map_path, cursor):
-        ref_file = record_map_path + os.path.sep + self.reference()
+        ref_file = record_map_path + os.path.sep + Parser.reference()
         cursor_location = cursor.location
         write_line = cursor_location.file.name + ':' + \
                      str(cursor_location.line) + ':' + \
