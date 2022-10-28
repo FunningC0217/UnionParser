@@ -193,6 +193,7 @@ class JavaParser(Parser):
                     f = open(def_file_path, mode="w+", encoding="utf8")
                     if not self.fileHasLine(def_file_path, def_line):
                         f.write(def_line)
+                        f.write("\n")
                     f.close()
             self.writeDefinitionsFile(storage, n)
 
@@ -208,8 +209,10 @@ class JavaParser(Parser):
                     f = open(record_file_path, mode="w+", encoding="utf8")
                     if not self.fileHasLine(record_file_path, ident_line):
                         f.write(ident_line)
+                        f.write("\n")
                     if not self.fileHasLine(record_file_path, type_line):
                         f.write(type_line)
+                        f.write("\n")
                     f.close()
             self.writeRecordFile(storage, n)
 
