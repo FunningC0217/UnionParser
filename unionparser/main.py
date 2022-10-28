@@ -13,6 +13,7 @@ from unionparser.cxxparser import CxxParser
 from unionparser.javaparser import JavaParser
 from unionparser.pythonparser import PythonParser
 
+
 def add_arguments(parser, proxy):
     parser.add_argument(
         "-s", "--storage", type=str, required=True,
@@ -44,13 +45,15 @@ def add_arguments(parser, proxy):
     log_group.add_argument(
         "--log-file",
         help="Redirect logs to the given file instead of writing to stderr."
-        "Has no effect if used with --log-config."
+             "Has no effect if used with --log-config."
     )
     return parser
+
 
 def _stdio():
     stdin, stdout = sys.stdin.buffer, sys.stdout.buffer
     return stdin, stdout
+
 
 def initProxy():
     proxy = CallProxy()
@@ -59,6 +62,7 @@ def initProxy():
     proxy.addParser(PythonParser())
     return proxy
 
+
 def getFiles(workspace):
     files = []
     for root, dirs, files in os.walk(workspace):
@@ -66,6 +70,7 @@ def getFiles(workspace):
         print(root)
         print(dirs)
         print(files)
+
 
 def main():
     proxy = initProxy()
@@ -77,6 +82,7 @@ def main():
     proxy.setWorkspace(args.workspace)
     proxy.setStorage(args.storage)
     proxy.doParse()
+
 
 if __name__ == '__main__':
     main()

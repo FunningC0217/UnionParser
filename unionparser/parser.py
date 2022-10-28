@@ -61,3 +61,21 @@ class Parser:
             f.close()
         return has_line
 
+    @staticmethod
+    def removeParseData(storage):
+        for root, dirs, files in os.walk(storage):
+            for file_name in files:
+                file_path = root + os.path.sep + file_name
+                log(__name__).critical("remove mapping file:" + os.path.abspath(file_path))
+                os.remove(file_path)
+
+    @staticmethod
+    def removeLostDir(storage):
+        for name in os.listdir(storage):
+            path = storage + os.path.sep + name
+            if os.path.isdir(path):
+                if not os.listdir(path):
+                    os.removedirs(path)
+                    log(__name__).critical("removeLostDir: " + os.path.abspath(path))
+                else:
+                    Parser.removeLostDir(path)

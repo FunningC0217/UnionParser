@@ -17,23 +17,6 @@ class CxxParser(Parser):
         self.__absLibClangSoPath = self.llvmLibDir() + os.sep + 'libclang.so'
         Config.set_library_file(self.__absLibClangSoPath)
 
-    def removeParseData(self, storage):
-        for root, dirs, files in os.walk(storage):
-            for file_name in files:
-                file_path = root + os.path.sep + file_name
-                log(__name__).critical("remove mapping file:" + os.path.abspath(file_path))
-                os.remove(file_path)
-
-    def removeLostDir(self, storage):
-        for name in os.listdir(storage):
-            path = storage + os.path.sep + name
-            if os.path.isdir(path):
-                if not os.listdir(path):
-                    os.removedirs(path)
-                    log(__name__).critical("removeLostDir: " + os.path.abspath(path))
-                else:
-                    self.removeLostDir(path)
-
     def doParse(self, storage, files, file):
         super(CxxParser, self).doParse(storage, files, file)
         index = clang.cindex.Index.create()

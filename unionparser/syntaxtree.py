@@ -1,5 +1,6 @@
 
 class SyntaxTreeNode:
+    src_file_path = ""
     prefix_len = 0
     type = ""
     string = ""
