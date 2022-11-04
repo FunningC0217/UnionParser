@@ -32,6 +32,9 @@ class Test1:
     def test1(self):
         pass
 
+class Test2(Test1):
+    pass
+
 
 if __name__ == '__main__':
     print('HelloWorld')

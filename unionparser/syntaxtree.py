@@ -1,4 +1,3 @@
-
 class SyntaxTreeNode:
     src_file_path = ""
     prefix_len = 0
@@ -23,3 +22,26 @@ def findParent(root: SyntaxTreeNode, prefix_len: int) -> SyntaxTreeNode:
         return findParent(node, prefix_len)
 
     return root
+
+
+def find_nodes_by_type(node: SyntaxTreeNode, type: str, recursion: bool = True):
+    ret = []
+    if not node:
+        return ret
+
+    if node.type == type:
+        ret.append(node)
+
+    for one in node.child:
+        if recursion:
+            ret.extend(find_nodes_by_type(one, type))
+        else:
+            if one.type == type:
+                ret.append(one)
+    return ret
+
+def get_source_file_path(node: SyntaxTreeNode):
+    if node.parent == None:
+        return node.src_file_path
+    else:
+        return get_source_file_path(node.parent)
