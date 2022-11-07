@@ -1,6 +1,11 @@
 CHANGES
 =======
 
+* add python record file and defitions file write
+* add python ast foreach
+* fix: add line sep from java line write
+* add java record and def flag file
+* fix not found checkstyle.jar module
 * add java ast tree from dump out
 * update install script source structure
 * add java parse and default python file
