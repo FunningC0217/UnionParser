@@ -40,8 +40,9 @@ def find_nodes_by_type(node: SyntaxTreeNode, type: str, recursion: bool = True):
                 ret.append(one)
     return ret
 
+
 def get_source_file_path(node: SyntaxTreeNode):
-    if node.parent == None:
+    if node.parent is None:
         return node.src_file_path
     else:
         return get_source_file_path(node.parent)

@@ -5,7 +5,7 @@ from unionparser.globallog import log
 import parser
 import ast
 import os
-from syntaxtree import *
+from unionparser.syntaxtree import *
 
 
 class PyAstCvt:
@@ -41,7 +41,10 @@ class PyAstCvt:
             new_node.parent = parent
             parent.child.append(new_node)
         # print("n", self.__stack, " " * self.__stack, node.__class__.__name__)
-        #
+
+        if not isinstance(node, ast.AST):
+            return
+
         # add node child field
         self.__stack += 1
         for field in node._fields:
@@ -99,7 +102,7 @@ class PythonParser(Parser, ABC):
         return name_nodes[0].string
 
     def getFuncDefString(self, node: SyntaxTreeNode) -> str:
-        return self.getFuncDefNameString(node) + "(" + self.getFuncDefArgsString(node) + ")"
+        return self.getFuncDefNameString(node)  # to long can mkdir + "(" + self.getFuncDefArgsString(node) + ")"
 
     def getClassDefString(self, node: SyntaxTreeNode) -> str:
         return "class " + self.getClassDefNameString(node)

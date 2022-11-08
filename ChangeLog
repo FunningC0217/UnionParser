@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* remove same of files
 * add python record file and defitions file write
 * add python ast foreach
 * fix: add line sep from java line write

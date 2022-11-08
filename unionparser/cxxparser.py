@@ -1,4 +1,5 @@
 import os
+from abc import ABC
 from io import open
 import subprocess
 
@@ -9,7 +10,7 @@ from unionparser.globallog import log
 from unionparser.parser import Parser
 
 
-class CxxParser(Parser):
+class CxxParser(Parser, ABC):
     __absLibClangSoPath = ""
 
     def __init__(self):
@@ -45,6 +46,7 @@ class CxxParser(Parser):
                                 stderr=subprocess.PIPE)
         proc.wait(1)
         line = proc.stdout.readline()
+        log(__name__).critical(str(line, encoding="utf-8"))
         if proc.returncode == 0:
             log(__name__).critical("llvm configure lib directory:" + str(line, encoding="utf-8"))
         return str(line, encoding="utf-8").replace('\n', '')
