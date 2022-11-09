@@ -1,0 +1,3 @@
+name=Test2
+bases=Test1
+type=ClassDef

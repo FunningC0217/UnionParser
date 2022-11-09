@@ -1,0 +1,4 @@
+name=__init__
+args=self,va1
+decorator_list_ids
+type=FunctionDef
