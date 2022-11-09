@@ -100,6 +100,11 @@ class CxxParser(Parser, ABC):
             find_name = cursor_type + " " + cursor.spelling
         else:
             pass
+        anonymousStart = find_name.find("(anonymous struct at /")
+        anonymousEnd = find_name.find(")")
+        if anonymousStart >= 0 and anonymousEnd >= 0:
+            find_name = find_name[0:anonymousStart] + find_name[anonymousEnd:]
+        print(find_name, cursor_type, cursor_kind_name, cursor.displayname)
         return find_name
 
     def getCursorDirPath(self, storage, cursor):
@@ -209,8 +214,8 @@ class CxxParser(Parser, ABC):
                         and cursor.kind.name in decl_kind_filter[parent_cursor.kind.name]:
                     cursor_map_path = self.getCursorDirPath(abs_storage_path, cursor)
                     if not os.path.exists(cursor_map_path):
+                        log(__name__).critical("mkdir " + cursor_map_path)
                         os.mkdir(cursor_map_path)
-
                     # write record file
                     self.writeRecordFile(cursor_map_path, cursor)
 
