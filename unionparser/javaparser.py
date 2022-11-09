@@ -261,7 +261,7 @@ class JavaParser(Parser):
 
     def doParse(self, storage, files, file):
         super(JavaParser, self).doParse(storage, files, file)
-        p = os.popen("java -jar "
+        p = os.popen("/usr/bin/java -jar "
                      + os.path.abspath(os.path.dirname(__file__))
                      + os.path.sep + "3rd/checkstyle-10.3.4-all.jar -t "
                      + file)

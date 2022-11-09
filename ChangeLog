@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* fix bug from python parser
 * remove same of files
 * add python record file and defitions file write
 * add python ast foreach

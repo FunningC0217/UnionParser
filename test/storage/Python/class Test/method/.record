@@ -1,0 +1,4 @@
+name=method
+args=self,va1,va2,va3
+decorator_list_ids
+type=FunctionDef

@@ -29,7 +29,7 @@ class CxxParser(Parser, ABC):
             self.removeLostDir(storage)
 
     def language(self):
-        return ['C', 'C++']
+        return ['C/C++']
 
     def mimetypes(self):
         return ['text/x-chdr', 'text/x-c++hdr', 'text/x-csrc', 'text/x-c++src']
@@ -42,8 +42,7 @@ class CxxParser(Parser, ABC):
         :return: str llvm-config execute stdout path from lib directory
         """
         proc = subprocess.Popen(["llvm-config", "--libdir"], shell=False,
-                                stdout=subprocess.PIPE,
-                                stderr=subprocess.PIPE)
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, env={"PATH": "/usr/bin"})
         proc.wait(1)
         line = proc.stdout.readline()
         log(__name__).critical(str(line, encoding="utf-8"))
