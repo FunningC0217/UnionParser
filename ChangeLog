@@ -1,6 +1,9 @@
 CHANGES
 =======
 
+* recovery test files
+* recovery test dir
+* fix c++ bug struct from anonymous
 * fix: fix java can not found bug
 * fix bug from python parser
 * remove same of files

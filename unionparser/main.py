@@ -81,6 +81,8 @@ def main():
     log(__name__).critical("started " + args_parser.description)
     proxy.setWorkspace(args.workspace)
     proxy.setStorage(args.storage)
+    if args.language:
+        proxy.setLanguage(args.language)
     proxy.doParse()
 
 

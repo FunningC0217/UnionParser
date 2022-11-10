@@ -55,13 +55,16 @@ class CallProxy:
             lang_files = []
             all_file = abs_files
             # Parse according to the given order
+            print(parser.language())
+            if self.__language not in parser.language():
+                continue
             for parser_mine in parser.mimetypes():
                 for file in all_file:
                     file_mime = mimetypes.guess_type(file)[0]
                     if file_mime == parser_mine:
                         lang_files.append(file)
-            for file in lang_files:
-                saved_path = self.__storage + os.sep + parser.rootName()
-                if not os.path.exists(saved_path):
-                    os.mkdir(saved_path)
-                parser.doParse(saved_path, lang_files, file)
+                for file in lang_files:
+                    saved_path = self.__storage + os.sep + parser.rootName()
+                    if not os.path.exists(saved_path):
+                        os.mkdir(saved_path)
+                    parser.doParse(saved_path, lang_files, file)

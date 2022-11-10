@@ -1,4 +1,0 @@
-name=sta_method
-args=self,va2
-decorator_list_idsstaticmethod
-type=FunctionDef

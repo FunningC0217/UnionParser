@@ -17,6 +17,8 @@ class CxxParser(Parser, ABC):
         super(CxxParser, self).__init__()
         self.__absLibClangSoPath = self.llvmLibDir() + os.sep + 'libclang.so'
         Config.set_library_file(self.__absLibClangSoPath)
+        self.__max_depth = 2
+        self.__cur_depth = 0
 
     def doParse(self, storage, files, file):
         super(CxxParser, self).doParse(storage, files, file)
@@ -55,11 +57,11 @@ class CxxParser(Parser, ABC):
             "TRANSLATION_UNIT": ["NAMESPACE", "STRUCT_DECL", "CLASS_DECL", "UNION_DECL", "TYPEDEF_DECL", "VAR_DECL",
                                  "FUNCTION_DECL"],
             "STRUCT_DECL": ["STRUCT_DECL", "FIELD_DECL", "CXX_METHOD", "CONSTRUCTOR", "DESTRUCTOR"],
-            "UNION_DECL": ["FIELD_DECL"],
+            "UNION_DECL": ["FIELD_DECL", "STRUCT_DECL", "FUNCTION_DECL"],
             "CLASS_DECL": ["CLASS_DECL", "UNION_DECL", "STRUCT_DECL", "TYPEDEF_DECL", "FIELD_DECL", "CXX_METHOD",
                            "CONSTRUCTOR", "DESTRUCTOR"],
             "NAMESPACE": ["NAMESPACE", "CLASS_DECL", "UNION_DECL", "STRUCT_DECL", "TYPEDEF_DECL", "FIELD_DECL",
-                          "VAR_DECL", "CXX_METHOD"]
+                          "VAR_DECL", "CXX_METHOD", "FUNCTION_DECL"],
         }
 
     def defKindFilter(self):
@@ -100,38 +102,41 @@ class CxxParser(Parser, ABC):
             find_name = cursor_type + " " + cursor.spelling
         else:
             pass
-        anonymousStart = find_name.find("(anonymous struct at /")
-        anonymousEnd = find_name.find(")")
-        if anonymousStart >= 0 and anonymousEnd >= 0:
-            find_name = find_name[0:anonymousStart] + find_name[anonymousEnd:]
-        print(find_name, cursor_type, cursor_kind_name, cursor.displayname)
+        anonymous_start = find_name.find("(anonymous")
+        anonymous_end = find_name.find(")")
+        if anonymous_start >= 0 and anonymous_end >= 0:
+            find_name = find_name[0:anonymous_start] + find_name[anonymous_end+1:]
+        else:
+            find_name = find_name.replace("/", " ")
         return find_name
 
     def getCursorDirPath(self, storage, cursor):
         if cursor:
+            # self.outCursor("current", cursor)
             suffix_path = os.sep + self.getCursorDirName(cursor)
             parent_cursor = cursor.semantic_parent
             while parent_cursor.kind.name != "TRANSLATION_UNIT":
+                # self.outCursor("parent", parent_cursor)
                 suffix_path = os.sep + self.getCursorDirName(parent_cursor) + suffix_path
                 parent_cursor = parent_cursor.semantic_parent
             return storage + suffix_path
         else:
             return storage
 
-    # def outCursor(self, title, cursor):
-    #     print(title)
-    #     print("translation_unit:", cursor.translation_unit.spelling)
-    #     print("cursor_file:", cursor.location.file.name)
-    #     print("extent start:", cursor.extent.start)
-    #     print("extent end:", cursor.extent.end)
-    #     print("this_cursor:", cursor.displayname)
-    #     print("line:", cursor.location.line,
-    #           "col:", cursor.location.column,
-    #           "kind.name:", cursor.kind.name,
-    #           "displayName:", cursor.displayname,
-    #           "type.spelling:", cursor.type.spelling,
-    #           "type.kind.name:", cursor.type.kind.name)
-    #     print("")
+    def outCursor(self, title, cursor):
+        print(title)
+        print("translation_unit:", cursor.translation_unit.spelling)
+        print("cursor_file:", cursor.location.file.name)
+        print("extent start:", cursor.extent.start)
+        print("extent end:", cursor.extent.end)
+        print("this_cursor:", cursor.displayname)
+        print("line:", cursor.location.line,
+              "col:", cursor.location.column,
+              "kind.name:", cursor.kind.name,
+              "displayName:", cursor.displayname,
+              "type.spelling:", cursor.type.spelling,
+              "type.kind.name:", cursor.type.kind.name)
+        print("")
 
     def writeRecordFile(self, cursor_map_path, cursor):
         if os.path.exists(cursor_map_path):
@@ -145,6 +150,8 @@ class CxxParser(Parser, ABC):
                 f.close()
 
     def writeDeclaredFile(self, cursor_map_path, cursor):
+        if not os.path.exists(cursor_map_path):
+            return
         declared_file = cursor_map_path + os.sep + self.declared()
         cursor_location = cursor.location
         write_line = cursor_location.file.name + ':' + \
@@ -156,6 +163,8 @@ class CxxParser(Parser, ABC):
             f.close()
 
     def writeDefinitionsFile(self, cursor_map_path, cursor):
+        if not os.path.exists(cursor_map_path):
+            return
         def_file = cursor_map_path + os.sep + self.definitions()
         cursor_location = cursor.location
         write_line = cursor_location.file.name + ':' + \
@@ -167,6 +176,8 @@ class CxxParser(Parser, ABC):
             f.close()
 
     def writeReferenceFile(self, record_map_path, cursor):
+        if not os.path.exists(record_map_path):
+            return
         ref_file = record_map_path + os.path.sep + Parser.reference()
         cursor_location = cursor.location
         write_line = cursor_location.file.name + ':' + \
@@ -197,48 +208,56 @@ class CxxParser(Parser, ABC):
         return ""
 
     def doParseCursor(self, storage, files, cursor):
+        self.__cur_depth += 1
         abs_storage_path = os.path.abspath(storage)
         parent_cursor = cursor.semantic_parent
         translation_unit_file = cursor.translation_unit.spelling
         if parent_cursor:
-            cursor_file = cursor.location.file.name
+            if cursor.location.file:
+                cursor_file = cursor.location.file.name
+                #  and cursor_file in files
+                if cursor_file in files:
+                    decl_kind_filter = self.declKindFilter()
+                    def_kind_filter = self.defKindFilter()
+                    ref_kind_filter = self.refKindFilter()
 
-            #  and cursor_file in files
-            if cursor_file in files:
-                decl_kind_filter = self.declKindFilter()
-                def_kind_filter = self.defKindFilter()
-                ref_kind_filter = self.refKindFilter()
+                    # declared to write
+                    if parent_cursor.kind.name in decl_kind_filter.keys() \
+                            and cursor.kind.name in decl_kind_filter[parent_cursor.kind.name]:
+                        cursor_map_path = self.getCursorDirPath(abs_storage_path, cursor)
+                        cursor_map_path_list = cursor_map_path.split(os.path.sep)
+                        for one in cursor_map_path_list:
+                            if len(one) > 256:
+                                return
+                        cursor_parent_map_path = os.path.sep.join(cursor_map_path_list[0:len(cursor_map_path_list) - 1])
+                        if not os.path.exists(cursor_map_path) and os.path.exists(cursor_parent_map_path):
+                            # print("mkdir ", cursor_map_path)
+                            os.mkdir(cursor_map_path)
+                        # write record file
+                        self.writeRecordFile(cursor_map_path, cursor)
 
-                # declared to write
-                if parent_cursor.kind.name in decl_kind_filter.keys() \
-                        and cursor.kind.name in decl_kind_filter[parent_cursor.kind.name]:
-                    cursor_map_path = self.getCursorDirPath(abs_storage_path, cursor)
-                    if not os.path.exists(cursor_map_path):
-                        log(__name__).critical("mkdir " + cursor_map_path)
-                        os.mkdir(cursor_map_path)
-                    # write record file
-                    self.writeRecordFile(cursor_map_path, cursor)
+                        # write declared file
+                        if translation_unit_file == cursor_file:
+                            self.writeDeclaredFile(cursor_map_path, cursor)
 
-                    # write declared file
-                    if translation_unit_file == cursor_file:
-                        self.writeDeclaredFile(cursor_map_path, cursor)
+                    # definitions to write
+                    if parent_cursor.kind.name in def_kind_filter.keys() \
+                            and cursor.kind.name in def_kind_filter[parent_cursor.kind.name]:
+                        parent_cursor_map_path = self.getCursorDirPath(abs_storage_path, parent_cursor)
+                        # if os.path.exists(parent_cursor_map_path):
+                        # write definitions file
+                        self.writeDefinitionsFile(parent_cursor_map_path, parent_cursor)
 
-                # definitions to write
-                if parent_cursor.kind.name in def_kind_filter.keys() \
-                        and cursor.kind.name in def_kind_filter[parent_cursor.kind.name]:
-                    parent_cursor_map_path = self.getCursorDirPath(abs_storage_path, parent_cursor)
+                    if parent_cursor.kind.name in ref_kind_filter.keys() \
+                            and cursor.kind.name in ref_kind_filter[parent_cursor.kind.name]:
+                        if cursor.type.kind.name == "RECORD":
+                            ref_map_path = self.findRecordMapPath(storage, cursor.type.spelling)
+                            if ref_map_path != "":
+                                self.writeReferenceFile(ref_map_path, cursor)
+                            # self.outCursor("parent_cursor", parent_cursor)
+                            # self.outCursor("cursor", cursor)
 
-                    # write definitions file
-                    self.writeDefinitionsFile(parent_cursor_map_path, parent_cursor)
-
-                if parent_cursor.kind.name in ref_kind_filter.keys() \
-                        and cursor.kind.name in ref_kind_filter[parent_cursor.kind.name]:
-                    if cursor.type.kind.name == "RECORD":
-                        ref_map_path = self.findRecordMapPath(storage, cursor.type.spelling)
-                        if ref_map_path != "":
-                            self.writeReferenceFile(ref_map_path, cursor)
-                        # self.outCursor("parent_cursor", parent_cursor)
-                        # self.outCursor("cursor", cursor)
-
-        for next_cursor in cursor.get_children():
-            self.doParseCursor(storage, files, next_cursor)
+        if self.__cur_depth <= self.__max_depth:
+            for next_cursor in cursor.get_children():
+                self.doParseCursor(storage, files, next_cursor)
+        self.__cur_depth -= 1

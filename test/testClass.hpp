@@ -1,4 +1,25 @@
 #include <iostream>
+// template<class T, unsigned Min>
+
+// class small_vector
+// {
+//         small_vector()
+//         {
+//         }
+
+//         small_vector(const small_vector<T, Min> &o)
+//         {
+//             *this = o;
+//         }
+// };
+
+typedef union {
+    typedef struct {
+        double dob;
+    } Struct;
+}Un;
+
+
 
 union un1
 {
