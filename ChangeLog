@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* test union paser install status
 * set default ast tree depth level 2
 * recovery test files
 * recovery test dir
