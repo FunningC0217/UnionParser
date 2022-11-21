@@ -1,6 +1,7 @@
 CHANGES
 =======
 
+* set default ast tree depth level 2
 * recovery test files
 * recovery test dir
 * fix c++ bug struct from anonymous

@@ -1,0 +1,3 @@
+[console_scripts]
+unionparser = unionparser.main:main
+
